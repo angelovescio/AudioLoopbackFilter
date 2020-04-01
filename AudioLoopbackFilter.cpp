@@ -8,6 +8,7 @@
 // Copyright (c) Corey Auger.  All rights reserved.
 //------------------------------------------------------------------------------
 
+//Incorporates adds by vesh to work with ffmpeg as a DirectShow filter
 #include <windows.h>
 #include <streams.h>
 
