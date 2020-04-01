@@ -14,7 +14,6 @@ class CDynamicSourceStream;  // The class that will handle each pin
 class CDynamicSource: public CBaseFilter {
 public:
 
-    IFilterGraph* GetGraph() { return m_pGraph; }
     CDynamicSource(TCHAR *pName, LPUNKNOWN lpunk, CLSID clsid, HRESULT *phr);
 #ifdef UNICODE
     CDynamicSource(CHAR *pName, LPUNKNOWN lpunk, CLSID clsid, HRESULT *phr);
@@ -63,6 +62,7 @@ protected:
 
 class CDynamicSourceStream : public CAMThread, public CDynamicOutputPin {
 public:
+
     CDynamicSourceStream(TCHAR *pObjectName,
                          HRESULT *phr,
                          CDynamicSource*pms,

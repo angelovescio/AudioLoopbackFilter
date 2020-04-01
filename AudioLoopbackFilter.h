@@ -11,9 +11,9 @@
 #define __AUDIOLOOPBACKFILTER__
 
 //CLSID_AudioLoopbackFilter
-//{4DDE0EEE-779E-4157-A57D-1F13C1D0E362}
+//{3DDE0EEE-479E-4157-A57D-1F13C1D0E352}
 DEFINE_GUID(CLSID_AudioLoopbackFilter,
-0x4DDE0EEE, 0x779E, 0x4157, 0xA5, 0x7D, 0x1F, 0x13, 0xC1, 0xD0, 0xE3, 0x62);
+0x3DDE0EEE, 0x479E, 0x4157, 0xA5, 0x7D, 0x1F, 0x13, 0xC1, 0xD0, 0xE3, 0x52);
 
 //CLSID_SynthFilterPropertyPage
 //{79A98DE1-BC00-11ce-AC2E-444553541111}
@@ -119,20 +119,9 @@ private:
 // -------------------------------------------------------------------------
 // CAudioLoopbackPin manages the data flow from the output pin.
 
-class CAudioLoopbackPin : public CDynamicSourceStream, public IAMStreamConfig, public IKsPropertySet {
+class CAudioLoopbackPin : public CDynamicSourceStream {
 
 public:
-    //////////////////////////////////////////////////////////////////////////
-    //  IUnknown
-    //////////////////////////////////////////////////////////////////////////
-    STDMETHODIMP QueryInterface(REFIID riid, void** ppv);
-    STDMETHODIMP_(ULONG) AddRef() { return GetOwner()->AddRef(); }                                                          \
-    STDMETHODIMP_(ULONG) Release() { return GetOwner()->Release(); }
-
-    //////////////////////////////////////////////////////////////////////////
-    //  IQualityControl
-    //////////////////////////////////////////////////////////////////////////
-    STDMETHODIMP Notify(IBaseFilter* pSender, Quality q);
 
     CAudioLoopbackPin(HRESULT *phr, CAudioLoopbackFilter *pParent, LPCWSTR pPinName);
     ~CAudioLoopbackPin();
@@ -156,39 +145,6 @@ public:
 	HRESULT Run(REFERENCE_TIME tStart);
 	
 	HRESULT SetSyncSource(IReferenceClock *pClock);
-    //////////////////////////////////////////////////////////////////////////
-//  IAMStreamConfig
-//////////////////////////////////////////////////////////////////////////
-
-    HRESULT STDMETHODCALLTYPE SetFormat(AM_MEDIA_TYPE* pmt);
-
-    HRESULT STDMETHODCALLTYPE GetFormat(AM_MEDIA_TYPE** ppmt);
-
-    HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(int* piCount, int* piSize);
-
-    HRESULT STDMETHODCALLTYPE GetStreamCaps(int iIndex, AM_MEDIA_TYPE** ppMediaType, BYTE* pSCC);
-    //////////////////////////////////////////////////////////////////////////
-    // IKsPropertySet
-    //////////////////////////////////////////////////////////////////////////
-
-
-    HRESULT Set(REFGUID guidPropSet, DWORD dwID, void* pInstanceData,
-        DWORD cbInstanceData, void* pPropData, DWORD cbPropData);
-
-    // Get: Return the pin category (our only property). 
-    HRESULT Get(
-        REFGUID guidPropSet,   // Which property set.
-        DWORD dwPropID,        // Which property in that set.
-        void* pInstanceData,   // Instance data (ignore).
-        DWORD cbInstanceData,  // Size of the instance data (ignore).
-        void* pPropData,       // Buffer to receive the property data.
-        DWORD cbPropData,      // Size of the buffer.
-        DWORD* pcbReturned     // Return the size of the property.
-    );
-
-    // QuerySupported: Query whether the pin supports the specified property.
-    HRESULT QuerySupported(REFGUID guidPropSet, DWORD dwPropID, DWORD* pTypeSupport);
-
 
 private:
 

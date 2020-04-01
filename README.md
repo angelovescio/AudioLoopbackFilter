@@ -29,22 +29,6 @@ There are a few major differences in my filter from the one I was using [before]
 ## Finally 
 My solution has only undergone a very small amount of testing.  Which did include both a Windows 7 and Windows 8 machine.  However, if you have any trouble with the filter please contact me and I will be glad to help.  Thanks.
 
-## Use with FFMPEG
-Building the DLL allows you to install it as a filter for ffmpeg to access and record desktop audio
-* Install with regsvr32 <Path to DLL>
-* Check that it is added to ffmpeg with "ffmpeg -list_devices true -f dshow -i dummy"
-* Run a test with ffmpeg "ffmpeg -f dshow -i audio="DirectShow Loopback Adapter" -c:a libmp3lame -ar 44100 -b:a 320k -ac 1 output.mp3"
-
-## Warning about logging
-Audio will be crackly or even dropped due to file I/O if you compile the DEBUG build
-
-## Additional Items
-The necessary repo to include for the Windows samples is now a submodule, 
-* "git submodule init" 
-* "git submodule update"
-* Compile the necessary DirectShow components
-* Make sure everything is compiled the same way ALL of the way through, /MT on this DLL needs /MT on the Windows DirectShow libs you compiled, like strmbase.lib in baseclasses
-* If you are having trouble compiling baseclasses in Windows-classic-examples, the solution and project files for baseclasses that worked for me have been included	
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/coreyauger/audioloopbackfilter/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
