@@ -172,11 +172,11 @@ public:
     //////////////////////////////////////////////////////////////////////////
 
 
-    HRESULT Set(REFGUID guidPropSet, DWORD dwID, void* pInstanceData,
+    HRESULT STDMETHODCALLTYPE Set(REFGUID guidPropSet, DWORD dwID, void* pInstanceData,
         DWORD cbInstanceData, void* pPropData, DWORD cbPropData);
 
     // Get: Return the pin category (our only property). 
-    HRESULT Get(
+    HRESULT STDMETHODCALLTYPE Get(
         REFGUID guidPropSet,   // Which property set.
         DWORD dwPropID,        // Which property in that set.
         void* pInstanceData,   // Instance data (ignore).
@@ -187,7 +187,7 @@ public:
     );
 
     // QuerySupported: Query whether the pin supports the specified property.
-    HRESULT QuerySupported(REFGUID guidPropSet, DWORD dwPropID, DWORD* pTypeSupport);
+    HRESULT STDMETHODCALLTYPE QuerySupported(REFGUID guidPropSet, DWORD dwPropID, DWORD* pTypeSupport);
 
 
 private:
